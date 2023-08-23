@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 
 /**IMPORT COMPONENT */
-import Posts from "./features/Posts/Posts";
-import Post from "./features/Posts/Post";
+import Posts from "./components/posts/Posts";
+import Post from "./components/posts/post/Post";
 import PostForm from "./components/Form/PostForm";
 import logo from "./images/memories-Logo.png";
 
@@ -29,10 +29,10 @@ const App = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h2" align="left" color="skyblue">
+        <Typography variant="h2" align="left" color="skyblue" fontSize={"3rem"}>
           SosialGram
         </Typography>
-        <img src={logo} alt="memories" height="60" width={60} />
+        <img src={logo} alt="memories" height="48rem" width={"48rem"} />
       </AppBar>
       <Grow in>
         <Container>

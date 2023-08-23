@@ -11,12 +11,12 @@ import postsRoutes from "./routes/posts.js";
 const app = express();
 const port = process.env.PORT || 5000;
 
-/**ROUTES */
-app.use("/api/posts", postsRoutes);
-
 app.use(bodyParser.json({ limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
 app.use(cors());
+
+/**ROUTES */
+app.use("/api/posts", postsRoutes);
 
 const start = async () => {
   try {
