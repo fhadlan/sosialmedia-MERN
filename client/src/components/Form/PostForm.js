@@ -11,7 +11,7 @@ const PostForm = () => {
     title: "",
     message: "",
     tags: "",
-    selectedFile: "",
+    selectedFile: {},
   });
 
   const clearPost = () => {
@@ -24,8 +24,13 @@ const PostForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handlesubmit", postData);
-    dispatch(createPost(postData));
+    const formData = new FormData();
+    Object.entries(postData).forEach((data) => {
+      const [key, value] = data;
+      formData.append(key, value);
+    });
+    console.log("handlesubmit", formData);
+    dispatch(createPost(formData));
   };
 
   return (
@@ -70,6 +75,7 @@ const PostForm = () => {
         type="file"
         label="Image"
         multiline={false}
+        inputProps={{ accept: "image/png, image/jpeg" }}
         onChange={(e) =>
           setPostData({ ...postData, selectedFile: e.target.files[0] })
         }

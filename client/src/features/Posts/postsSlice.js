@@ -17,8 +17,8 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 
 export const createPost = createAsyncThunk(
   "posts/createPost",
-  async (newPost) => {
-    const response = await axios.post(apiUrl, newPost);
+  async (postData) => {
+    const response = await axios.post(apiUrl, postData);
     return response.data;
   }
 );
