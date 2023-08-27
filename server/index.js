@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
 app.use(cors());
 
 /**ROUTES */
-app.use("/assets", express.static("/public/assets"));
+app.use("/assets", express.static("public/assets"));
 app.use("/api/posts", postsRoutes);
 
 const start = async () => {

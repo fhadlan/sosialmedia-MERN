@@ -81,7 +81,7 @@ const PostForm = () => {
         }
       />
       <Button type="submit" variant="contained">
-        Post
+        <Typography>Post</Typography>
       </Button>
     </Box>
   );

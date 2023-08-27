@@ -42,7 +42,7 @@ const postsSlice = createSlice({
       })
       .addCase(createPost.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.values.push(action.payload);
+        state.values.unshift(action.payload);
       });
   },
 });

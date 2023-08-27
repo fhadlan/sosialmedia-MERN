@@ -1,11 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { CircularProgress, Grid } from "@mui/material";
 import {
   fetchPosts,
   getPostsStatus,
   selectAllPosts,
 } from "../../features/Posts/postsSlice";
+import Post from "./post/Post";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -29,10 +31,22 @@ const Posts = () => {
       content = <div>idle</div>;
       break;
     case "loading":
-      content = <div>Loading</div>;
+      content = (
+        <div>
+          <CircularProgress />
+        </div>
+      );
       break;
     case "succeeded":
-      content = <div>sukses</div>;
+      content = (
+        <Grid container gap={2}>
+          {posts.map((post) => (
+            <Grid item key={post._id}>
+              <Post postData={post}></Post>
+            </Grid>
+          ))}
+        </Grid>
+      );
       break;
     case "failed":
       content = <div>error</div>;
