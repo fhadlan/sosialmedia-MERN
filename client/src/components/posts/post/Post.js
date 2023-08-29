@@ -11,8 +11,17 @@ import {
 import { ThumbUp, Delete, MoreHoriz } from "@mui/icons-material";
 import moment from "moment";
 import React from "react";
+import { deletePost } from "../../../features/Posts/postsSlice";
+import { useDispatch } from "react-redux";
 
 const Post = ({ postData }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    console.log("handledelete", id);
+    dispatch(deletePost(id));
+  };
+
   return (
     <Card sx={{ maxWidth: "20rem", position: "relative" }}>
       <CardMedia
@@ -38,7 +47,7 @@ const Post = ({ postData }) => {
           <ThumbUp />
         </IconButton>
         <Typography>{postData.likeCount}</Typography>
-        <IconButton>
+        <IconButton onClick={() => handleDelete(postData._id)}>
           <Delete />
         </IconButton>
       </CardActions>

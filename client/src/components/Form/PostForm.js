@@ -17,6 +17,7 @@ const PostForm = () => {
   const clearPost = () => {
     setPostData();
   };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setPostData({ ...postData, [name]: value });
