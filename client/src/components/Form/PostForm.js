@@ -43,6 +43,7 @@ const PostForm = () => {
       boxShadow={1}
       padding={1}
       borderRadius={2}
+      sx={{ backgroundColor: "white" }}
     >
       <Typography variant="h5" textAlign={"center"}>
         Buat post

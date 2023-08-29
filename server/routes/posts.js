@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { createPost, getPost } from "../controller/posts.js";
+import { createPost, getPost, updatePost } from "../controller/posts.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,5 +22,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.route("/").get(getPost).post(upload.single("selectedFile"), createPost);
+router.route(":id").patch(updatePost);
 
 export default router;
