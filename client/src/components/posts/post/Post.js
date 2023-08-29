@@ -23,22 +23,41 @@ const Post = ({ postData }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: "20rem", position: "relative" }}>
+    <Card sx={{ position: "relative" }}>
       <CardMedia
-        sx={{ objectFit: "fill", filter: "brightness(50%)" }}
+        sx={{
+          height: "10rem",
+          objectFit: "cover",
+          filter: "brightness(50%)",
+        }}
         component={"img"}
         image={`http://localhost:5000/assets/${postData.fileName}`}
       />
-      <Box position={"absolute"} top={5} left={5} color={"HighlightText"}>
-        <Typography gutterBottom variant="h6">
-          {postData.creator}
-        </Typography>
-        <Typography variant="body2">
-          {moment(postData.createdAt).fromNow()}
-        </Typography>
+      <Box
+        width={"100%"}
+        position={"absolute"}
+        top={0}
+        left={0}
+        color={"HighlightText"}
+        display={"flex"}
+        justifyContent={"space-between"}
+      >
+        <Box p={1} maxWidth={"70%"}>
+          <Typography variant="h6" noWrap>
+            {postData.creator}
+          </Typography>
+          <Typography variant="body2">
+            {moment(postData.createdAt).fromNow()}
+          </Typography>
+        </Box>
+        <Box p={1}>
+          <IconButton size="small" color="inherit">
+            <MoreHoriz />
+          </IconButton>
+        </Box>
       </Box>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom noWrap>
           {postData.title}
         </Typography>
       </CardContent>

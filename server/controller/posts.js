@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const getPost = async (req, res) => {
-  const postMessages = await PostMessage.find().sort({ createdAt: -1 });
+  const postMessages = await PostMessage.find().sort({ createdAt: "desc" });
   res.status(200).json(postMessages);
 };
 
@@ -37,9 +37,7 @@ export const deletePost = async (req, res) => {
   const deletedPost = await PostMessage.findByIdAndDelete(_id);
   await unlink(
     path.join(__dirname, `../public/assets/${deletedPost.fileName}`),
-    (err) => {
-      console.log(err);
-    }
+    (err) => {}
   );
   return res.status(200).json(deletedPost);
 };

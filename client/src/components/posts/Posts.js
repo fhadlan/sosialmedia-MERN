@@ -41,7 +41,7 @@ const Posts = () => {
       content = (
         <Grid container gap={2}>
           {posts.map((post) => (
-            <Grid item key={post._id}>
+            <Grid item key={post._id} xs={12} sm={5}>
               <Post postData={post}></Post>
             </Grid>
           ))}
