@@ -1,52 +1,29 @@
 import React from "react";
-import {
-  Container,
-  AppBar,
-  Typography,
-  Grow,
-  Grid,
-  Toolbar,
-} from "@mui/material";
+import { Container, Grow, Grid } from "@mui/material";
 
 /**IMPORT COMPONENT */
-import Posts from "./components/posts/Posts";
-import Post from "./components/posts/post/Post";
+import Posts from "./components/Posts/Posts";
 import PostForm from "./components/Form/PostForm";
-import logo from "./images/memories-Logo.png";
+
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   return (
-    <Container maxWidth="lg">
-      <AppBar
-        position="static"
-        color="inherit"
-        sx={{
-          borderRadius: 5,
-          margin: "40px 0",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h2" align="left" color="skyblue" fontSize={"3rem"}>
-          SosialGram
-        </Typography>
-        <img src={logo} alt="memories" height="48rem" width={"48rem"} />
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid container justifyContent="space-between" alignItems={"stretch"}>
-            <Grid item xs={12} sm={8}>
+    <>
+      <Navbar />
+      <Container>
+        <Grow in>
+          <Grid container justifyContent="space-between" mt={1} spacing={1}>
+            <Grid item xs={12} sm={9}>
               <Posts />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <PostForm />
             </Grid>
           </Grid>
-        </Container>
-      </Grow>
-    </Container>
+        </Grow>
+      </Container>
+    </>
   );
 };
 

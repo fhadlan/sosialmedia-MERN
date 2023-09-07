@@ -43,7 +43,7 @@ const PostForm = () => {
       rowGap={1.5}
       boxShadow={1}
       padding={1}
-      borderRadius={2}
+      borderRadius={1}
       sx={{ backgroundColor: "white" }}
     >
       <Typography variant="h5" textAlign={"center"}>
