@@ -14,10 +14,10 @@ const App = () => {
       <Container>
         <Grow in>
           <Grid container justifyContent="space-between" mt={1} spacing={1}>
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} sm={8} md={9}>
               <Posts />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4} md={3}>
               <PostForm />
             </Grid>
           </Grid>
