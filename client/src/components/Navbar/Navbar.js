@@ -35,7 +35,7 @@ const Navbar = () => {
             <Avatar></Avatar>
           ) : (
             <Button>
-              <Typography variant="button" component={Link} to={"/Auth"}>
+              <Typography variant="button" component={Link} to={"/auth"}>
                 Login
               </Typography>
             </Button>
