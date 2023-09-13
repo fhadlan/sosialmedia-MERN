@@ -1,15 +1,19 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
-
-const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/auth", element: <Auth /> },
-]);
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;

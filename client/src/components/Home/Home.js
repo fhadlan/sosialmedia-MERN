@@ -7,7 +7,6 @@ import Navbar from "../Navbar/Navbar";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <Container>
         <Grow in>
           <Grid container justifyContent="space-between" mt={1} spacing={1}>
