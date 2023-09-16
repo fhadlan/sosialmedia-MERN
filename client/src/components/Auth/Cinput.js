@@ -22,15 +22,17 @@ const Cinput = ({
       onChange={handleChange}
       required
       InputProps={
-        name === "password" && {
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={handleShowPassword}>
-                {type === "password" ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }
+        name === "password"
+          ? {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword}>
+                    {type === "password" ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }
+          : {}
       }
     />
   </Grid>

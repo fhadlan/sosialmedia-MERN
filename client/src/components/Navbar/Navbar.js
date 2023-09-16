@@ -14,7 +14,12 @@ const Navbar = () => {
   const user = null;
   return (
     <Box mb={1}>
-      <AppBar position="static" color="default" variant="outlined">
+      <AppBar
+        position="static"
+        color="default"
+        variant="outlined"
+        elevation={0}
+      >
         <Toolbar sx={{ display: "flex" }}>
           <img src={logo} alt="memories" height="48rem" width={"48rem"} />
           <Typography

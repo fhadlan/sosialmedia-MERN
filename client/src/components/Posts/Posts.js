@@ -11,11 +11,9 @@ import Post from "./Post/Post";
 
 const Posts = () => {
   const dispatch = useDispatch();
-
+  /* CEK STATE POSTS */
   const posts = useSelector(selectAllPosts);
   const postsStatus = useSelector(getPostsStatus);
-  console.log("post status:", postsStatus);
-  console.log("posts:", posts);
 
   useEffect(() => {
     if (postsStatus === "idle") {
@@ -25,7 +23,6 @@ const Posts = () => {
   }, [postsStatus, dispatch]);
 
   let content;
-  console.log(postsStatus);
   switch (postsStatus) {
     case "idle":
       content = <div>idle</div>;

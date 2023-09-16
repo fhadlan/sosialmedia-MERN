@@ -5,7 +5,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import connect from "./db/connect.js";
 
-import postsRoutes from "./routes/posts.js";
+/**IMPORT ROUTER */
+import authRouter from "./routes/auth.js";
+import postsRouter from "./routes/posts.js";
 
 /**INIT */
 const app = express();
@@ -17,7 +19,8 @@ app.use(cors());
 
 /**ROUTES */
 app.use("/assets", express.static("public/assets"));
-app.use("/api/posts", postsRoutes);
+app.use("/api/posts", postsRouter);
+app.use("/api/auth", authRouter);
 
 const start = async () => {
   try {

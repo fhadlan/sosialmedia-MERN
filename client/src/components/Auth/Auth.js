@@ -16,11 +16,24 @@ import { Lock, PersonAdd } from "@mui/icons-material";
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSingUp] = useState(false);
-  const handleChange = () => {};
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
   const handleSwitchSignUp = () => setIsSingUp((prevIsSignUp) => !prevIsSignUp);
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
     <Container component={"main"} maxWidth="xs">
@@ -107,14 +120,22 @@ const Auth = () => {
             {isSignUp ? (
               <Typography>
                 Sudah punya akun?{" "}
-                <Link component={"button"} onClick={handleSwitchSignUp}>
+                <Link
+                  component={"button"}
+                  type="button"
+                  onClick={handleSwitchSignUp}
+                >
                   Login
                 </Link>
               </Typography>
             ) : (
               <Typography>
                 Belum punya akun?{" "}
-                <Link component={"button"} onClick={handleSwitchSignUp}>
+                <Link
+                  component={"button"}
+                  type="button"
+                  onClick={handleSwitchSignUp}
+                >
                   Daftar
                 </Link>
               </Typography>
