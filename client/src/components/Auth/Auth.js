@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signup } from "../../features/Auth/authSlice";
 
 import Cinput from "./Cinput";
 import {
@@ -14,6 +16,7 @@ import {
 import { Lock, PersonAdd } from "@mui/icons-material";
 
 const Auth = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSingUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,10 +32,12 @@ const Auth = () => {
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
+
   const handleSwitchSignUp = () => setIsSingUp((prevIsSignUp) => !prevIsSignUp);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(signup(formData));
   };
 
   return (

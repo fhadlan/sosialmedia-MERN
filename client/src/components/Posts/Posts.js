@@ -17,16 +17,12 @@ const Posts = () => {
 
   useEffect(() => {
     if (postsStatus === "idle") {
-      console.log("triggered effect");
       dispatch(fetchPosts());
     }
   }, [postsStatus, dispatch]);
 
   let content;
   switch (postsStatus) {
-    case "idle":
-      content = <div>idle</div>;
-      break;
     case "loading":
       content = (
         <div>

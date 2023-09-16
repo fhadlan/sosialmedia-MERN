@@ -7,6 +7,7 @@ export const signin = async (req, res) => {
 
 export const signup = async (req, res) => {
   // const {firstName,lastName,email,password} = req.body;
+  console.log(req.body);
   const result = User.create(req.body);
   res.status(201).json(result);
 };

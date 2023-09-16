@@ -11,7 +11,6 @@ const initialState = {
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await axios.get(apiUrl);
-  console.log(response.data);
   return response.data;
 });
 
