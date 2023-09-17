@@ -4,7 +4,7 @@ import axios from "axios";
 const apiUrl = "http://localhost:5000/api/auth/";
 
 const initialState = {
-  values: [],
+  values: null,
   status: "idle",
   error: null,
 };
@@ -20,7 +20,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(signup.fulfilled, (state, action) => {
       state.status = "fulfilled";
-      state.values.push(...action.payload);
+      state.values = action.payload;
     });
   },
 });

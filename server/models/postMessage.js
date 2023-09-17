@@ -1,21 +1,19 @@
 import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema({
-  title: String,
-  message: String,
-  creator: String,
-  tags: [String],
-  fileName: String,
-  likes: {
-    type: Map,
-    of: Boolean,
-    default: {},
+const postSchema = mongoose.Schema(
+  {
+    title: String,
+    message: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    tags: { type: String, default: [] },
+    fileName: String,
+    likes: { type: String, default: [] },
   },
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
-});
+  { timestamps: true }
+);
 
 const PostMessage = mongoose.model("PostMessage", postSchema);
 

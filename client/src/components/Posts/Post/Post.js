@@ -8,7 +8,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Modal,
   Dialog,
   DialogContent,
   DialogContentText,

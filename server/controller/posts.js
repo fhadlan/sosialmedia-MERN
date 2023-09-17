@@ -9,7 +9,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const getPost = async (req, res) => {
-  const postMessages = await PostMessage.find().sort({ createdAt: "desc" });
+  const postMessages = await PostMessage.find()
+    .populate("userId", "firstName lastName")
+    .sort({ createdAt: "desc" });
   res.status(200).json(postMessages);
 };
 
