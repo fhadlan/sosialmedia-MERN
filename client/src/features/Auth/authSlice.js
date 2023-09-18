@@ -1,27 +1,24 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const apiUrl = "http://localhost:5000/api/auth/";
+import { createSlice } from "@reduxjs/toolkit";
+import { signup, signin } from "./authAPI";
 
 const initialState = {
-  values: null,
+  data: null,
   status: "idle",
   error: null,
 };
-
-export const signup = createAsyncThunk("auth/signup", async (postData) => {
-  const response = axios.post(apiUrl + "signup", postData);
-  return response;
-});
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(signup.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.values = action.payload;
-    });
+    builder
+      .addCase(signup.fulfilled, (state, action) => {
+        state.status = "succeeded";
+      })
+      .addCase(signin.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      });
   },
 });
 

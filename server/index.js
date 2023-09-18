@@ -5,6 +5,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import connect from "./db/connect.js";
 
+/**IMPORT MIDDLEWARE */
+import { errorHandlerMiddleware } from "./middleware/error-handler.js";
+
 /**IMPORT ROUTER */
 import authRouter from "./routes/auth.js";
 import postsRouter from "./routes/posts.js";
@@ -21,6 +24,9 @@ app.use(cors());
 app.use("/assets", express.static("public/assets"));
 app.use("/api/posts", postsRouter);
 app.use("/api/auth", authRouter);
+
+/**ERROR HANDLER */
+app.use(errorHandlerMiddleware);
 
 const start = async () => {
   try {

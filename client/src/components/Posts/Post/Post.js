@@ -17,8 +17,8 @@ import {
 import { ThumbUp, Delete, MoreHoriz, Edit } from "@mui/icons-material";
 import moment from "moment";
 import React, { useState } from "react";
-import { deletePost } from "../../../features/Posts/postsSlice";
 import { useDispatch } from "react-redux";
+import { deletePost } from "../../../features/Posts/postsAPI";
 
 const Post = ({ postData }) => {
   const [editMenu, setEditMenu] = useState(null);

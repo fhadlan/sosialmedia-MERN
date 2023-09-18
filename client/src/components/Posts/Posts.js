@@ -2,18 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CircularProgress, Grid } from "@mui/material";
-import {
-  fetchPosts,
-  getPostsStatus,
-  selectAllPosts,
-} from "../../features/Posts/postsSlice";
+import { fetchPosts } from "../../features/Posts/postsAPI";
 import Post from "./Post/Post";
 
 const Posts = () => {
   const dispatch = useDispatch();
   /* CEK STATE POSTS */
-  const posts = useSelector(selectAllPosts);
-  const postsStatus = useSelector(getPostsStatus);
+  const posts = useSelector((state) => state.posts.data);
+  const postsStatus = useSelector((state) => state.posts.status);
 
   useEffect(() => {
     if (postsStatus === "idle") {
@@ -24,18 +20,14 @@ const Posts = () => {
   let content;
   switch (postsStatus) {
     case "loading":
-      content = (
-        <div>
-          <CircularProgress />
-        </div>
-      );
+      content = <CircularProgress />;
       break;
     case "succeeded":
       content = (
         <Grid container spacing={1}>
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={5} md={3}>
-              <Post postData={post}></Post>
+              <Post postData={post} />
             </Grid>
           ))}
         </Grid>
@@ -46,7 +38,7 @@ const Posts = () => {
       break;
   }
 
-  return <>{content} </>;
+  return content;
 };
 
 export default Posts;

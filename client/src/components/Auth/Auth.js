@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { signup } from "../../features/Auth/authSlice";
+import { signin, signup } from "../../features/Auth/authAPI";
 
 import Cinput from "./Cinput";
 import {
@@ -37,7 +37,7 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup(formData));
+    isSignUp ? dispatch(signup(formData)) : dispatch(signin(formData));
   };
 
   return (

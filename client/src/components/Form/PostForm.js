@@ -9,8 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { createPost } from "../../features/Posts/postsSlice";
-
+import { createPost } from "../../features/Posts/postsAPI";
 const PostForm = () => {
   const dispatch = useDispatch();
   const [postData, setPostData] = useState({

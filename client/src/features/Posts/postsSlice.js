@@ -1,31 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const apiUrl = "http://localhost:5000/api/posts";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchPosts, createPost, deletePost } from "./postsAPI";
 
 const initialState = {
-  values: [],
+  data: [],
   status: "idle",
   error: null,
 };
-
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await axios.get(apiUrl);
-  return response.data;
-});
-
-export const createPost = createAsyncThunk(
-  "posts/createPost",
-  async (postData) => {
-    const response = await axios.post(apiUrl, postData);
-    return response.data;
-  }
-);
-
-export const deletePost = createAsyncThunk("posts/deletePost", async (id) => {
-  const response = await axios.delete(`${apiUrl}/${id}`);
-  return response.data;
-});
 
 const postsSlice = createSlice({
   name: "posts",
@@ -38,27 +18,23 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.values.push(...action.payload);
+        state.data.push(...action.payload);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.status = "Failed";
-        state.values = action.error.message;
+        state.status = "failed";
+        state.data = action.error.message;
       })
       .addCase(createPost.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.values.unshift(action.payload);
+        state.data.unshift(action.payload);
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.values = state.values.filter(
+        state.data = state.data.filter(
           (post) => post._id !== action.payload._id
         );
       });
   },
 });
 
-export const selectAllPosts = (state) => state.posts.values;
-export const getPostsStatus = (state) => state.posts.status;
-
-// export const {} = postsSlice.actions;
 export default postsSlice.reducer;

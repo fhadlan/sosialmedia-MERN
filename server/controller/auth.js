@@ -1,9 +1,21 @@
 import "express-async-errors";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 export const signin = async (req, res) => {
-  res.send("signin ok");
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  const isMatch = await bcrypt.compare(password, user.password);
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+  res.status(200).json({
+    token: token,
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  });
 };
 
 export const signup = async (req, res) => {
@@ -16,5 +28,6 @@ export const signup = async (req, res) => {
     email,
     password: hashedPassword,
   });
+
   res.status(201).json({ result });
 };
