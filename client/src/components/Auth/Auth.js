@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signin, signup } from "../../features/Auth/authAPI";
-
+import { useNavigate } from "react-router-dom";
 import Cinput from "./Cinput";
 import {
   Container,
@@ -17,6 +17,7 @@ import { Lock, PersonAdd } from "@mui/icons-material";
 
 const Auth = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSingUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,6 +26,13 @@ const Auth = () => {
     email: "",
     password: "",
   });
+
+  const auth = useSelector((state) => state.auth.status);
+  useEffect(() => {
+    if (auth === "succeeded") {
+      navigate("/");
+    }
+  }, [auth, useDispatch]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

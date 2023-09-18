@@ -7,6 +7,7 @@ export const signin = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) throw new Error("Password salah");
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });

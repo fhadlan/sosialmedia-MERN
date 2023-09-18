@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -6,12 +6,29 @@ import {
   Box,
   Button,
   Toolbar,
+  Menu,
+  MenuItem,
   Typography,
 } from "@mui/material";
 import logo from "../../images/memories-Logo.png";
 
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../../features/Auth/authSlice";
+
 const Navbar = () => {
-  const user = null;
+  const [authMenu, setAuthMenu] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.data);
+
+  const menuOpen = Boolean(authMenu);
+  const handleMenuClick = (e) => setAuthMenu(e.currentTarget);
+  const handleMenuClose = () => setAuthMenu(null);
+
+  const handleSignOut = () => {
+    dispatch(signout());
+    setAuthMenu(null);
+  };
+
   return (
     <Box mb={1}>
       <AppBar
@@ -32,7 +49,10 @@ const Navbar = () => {
           </Typography>
           <Box flexGrow={1} />
           {user ? (
-            <Avatar></Avatar>
+            <Box>
+              <Typography>{`${user.data.firstName} ${user.data.lastName}`}</Typography>
+              <Avatar component={"button"} onClick={handleMenuClick}></Avatar>
+            </Box>
           ) : (
             <Button>
               <Typography variant="button" component={Link} to={"/auth"}>
@@ -42,6 +62,19 @@ const Navbar = () => {
           )}
         </Toolbar>
       </AppBar>
+      <Menu
+        id="auth-menu"
+        anchorEl={authMenu}
+        open={menuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem>
+          <Typography>Edit</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleSignOut}>
+          <Typography>Log out</Typography>
+        </MenuItem>
+      </Menu>
     </Box>
   );
 };
