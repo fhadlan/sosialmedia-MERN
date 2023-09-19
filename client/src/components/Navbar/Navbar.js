@@ -38,20 +38,27 @@ const Navbar = () => {
         elevation={0}
       >
         <Toolbar sx={{ display: "flex" }}>
-          <img src={logo} alt="memories" height="48rem" width={"48rem"} />
-          <Typography
+          <Box
             component={Link}
             to={"/"}
-            variant="h2"
-            display={{ xs: "none", sm: "inline" }}
+            sx={{ textDecoration: "none" }}
+            color={"inherit"}
           >
-            SosialGram
-          </Typography>
+            <img src={logo} alt="memories" height="48rem" width={"48rem"} />
+            <Typography variant="h2" display={{ xs: "none", sm: "inline" }}>
+              SosialGram
+            </Typography>
+          </Box>
           <Box flexGrow={1} />
           {user ? (
-            <Box>
-              <Typography>{`${user.data.firstName} ${user.data.lastName}`}</Typography>
-              <Avatar component={"button"} onClick={handleMenuClick}></Avatar>
+            <Box display={"flex"} justifyContent={"space-evenly"}>
+              <Typography
+                variant="h5"
+                display={{ xs: "none", sm: "inline" }}
+              >{`${user.data.firstName} ${user.data.lastName}`}</Typography>
+              <Avatar onClick={handleMenuClick}>
+                {user.data.firstName[0].toUpperCase()}
+              </Avatar>
             </Box>
           ) : (
             <Button>

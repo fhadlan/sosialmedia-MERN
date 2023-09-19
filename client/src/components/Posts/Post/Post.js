@@ -51,7 +51,7 @@ const Post = ({ postData }) => {
           position={"absolute"}
           top={0}
           left={0}
-          color={"HighlightText"}
+          color={"white"}
           display={"flex"}
           justifyContent={"space-between"}
         >
