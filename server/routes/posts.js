@@ -8,6 +8,7 @@ import {
   createPost,
   deletePost,
   getPost,
+  likePost,
   updatePost,
 } from "../controller/posts.js";
 
@@ -29,7 +30,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ROUTES
-router.route("/").get(getPost).post(upload.single("selectedFile"), createPost);
+router
+  .route("/")
+  .get(getPost)
+  .post(upload.single("selectedFile"), createPost)
+  .patch(likePost);
 router.route("/:id").patch(updatePost).delete(deletePost);
 
 export default router;

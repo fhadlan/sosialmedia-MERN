@@ -20,3 +20,11 @@ export const deletePost = createAsyncThunk("posts/deletePost", async (id) => {
   const response = await axios.delete(`${apiUrl}/${id}`);
   return response.data;
 });
+
+export const likePost = createAsyncThunk(
+  "posts/like",
+  async ({ postId, userId }) => {
+    const response = await axios.patch(apiUrl, { postId, userId });
+    return response;
+  }
+);

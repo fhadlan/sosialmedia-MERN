@@ -41,11 +41,18 @@ export const updatePost = async (req, res) => {
 };
 
 export const likePost = async (req, res) => {
-  const { id: _id } = req.body;
-  if (!mongoose.Types.ObjectId.isValid(_id))
-    return res.status(404).json({ error: "Post tidak valid" });
-  const likes = await postMessage.findById(id, "likes");
-  const isLiked = likes.get(userId);
+  const { postId, userId } = req.body;
+  const post = await PostMessage.findById(postId);
+  const isLiked = post.likes.findIndex((id) => id === userId);
+  if (isLiked === -1) {
+    post.likes.push(userId);
+  } else {
+    post.likes = post.likes.filter((id) => id !== userId);
+  }
+  const updatedPost = await PostMessage.findByIdAndUpdate(postId, post, {
+    new: true,
+  });
+  res.status(200).json(updatedPost);
 };
 
 export const deletePost = async (req, res) => {

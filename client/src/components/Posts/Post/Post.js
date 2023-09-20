@@ -17,19 +17,21 @@ import {
 import { ThumbUp, Delete, MoreHoriz, Edit } from "@mui/icons-material";
 import moment from "moment";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deletePost } from "../../../features/Posts/postsAPI";
+import { useDispatch } from "react-redux";
+import { deletePost, likePost } from "../../../features/Posts/postsAPI";
 
 const Post = ({ postData, userId }) => {
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
   const dispatch = useDispatch();
+  const creator = `${postData.userId.firstName} ${postData.userId.lastName}`;
 
   const menuOpen = Boolean(editMenu);
   const deleteOpen = Boolean(dialogDelete);
 
   const handleMenuClick = (e) => setEditMenu(e.currentTarget);
   const handleMenuClose = () => setEditMenu(null);
+  const handleLike = () => dispatch(likePost({ postId: postData._id, userId }));
   const handleDeleteClick = () => setDialogDelete(true);
   const handleDeleteClose = () => setDialogDelete(false);
   const handleDelete = (id) => dispatch(deletePost(id));
@@ -57,7 +59,7 @@ const Post = ({ postData, userId }) => {
         >
           <Box p={1} maxWidth={"70%"}>
             <Typography variant="h6" noWrap>
-              {postData.creator}
+              {creator}
             </Typography>
             <Typography variant="body2">
               {moment(postData.createdAt).fromNow()}
@@ -81,10 +83,10 @@ const Post = ({ postData, userId }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton size="small">
+          <IconButton size="small" onClick={handleLike}>
             <ThumbUp />
           </IconButton>
-          <Typography>{postData.likeCount}</Typography>
+          <Typography>{postData.likes.length}</Typography>
         </CardActions>
       </Card>
 
