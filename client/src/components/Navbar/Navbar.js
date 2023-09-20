@@ -18,7 +18,7 @@ import { signout } from "../../features/Auth/authSlice";
 const Navbar = () => {
   const [authMenu, setAuthMenu] = useState(null);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.data);
+  const auth = useSelector((state) => state.auth.data);
 
   const menuOpen = Boolean(authMenu);
   const handleMenuClick = (e) => setAuthMenu(e.currentTarget);
@@ -50,14 +50,14 @@ const Navbar = () => {
             </Typography>
           </Box>
           <Box flexGrow={1} />
-          {user ? (
+          {auth._id != null ? (
             <Box display={"flex"} justifyContent={"space-evenly"}>
               <Typography
                 variant="h5"
                 display={{ xs: "none", sm: "inline" }}
-              >{`${user.data.firstName} ${user.data.lastName}`}</Typography>
+              >{`${auth.firstName} ${auth.lastName}`}</Typography>
               <Avatar onClick={handleMenuClick}>
-                {user.data.firstName[0].toUpperCase()}
+                {auth.firstName[0].toUpperCase()}
               </Avatar>
             </Box>
           ) : (

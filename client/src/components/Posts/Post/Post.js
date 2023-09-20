@@ -17,10 +17,10 @@ import {
 import { ThumbUp, Delete, MoreHoriz, Edit } from "@mui/icons-material";
 import moment from "moment";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../../../features/Posts/postsAPI";
 
-const Post = ({ postData }) => {
+const Post = ({ postData, userId }) => {
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
   const dispatch = useDispatch();
@@ -64,9 +64,15 @@ const Post = ({ postData }) => {
             </Typography>
           </Box>
           <Box p={1}>
-            <IconButton size="small" color="inherit" onClick={handleMenuClick}>
-              <MoreHoriz />
-            </IconButton>
+            {userId === postData.userId._id && (
+              <IconButton
+                size="small"
+                color="inherit"
+                onClick={handleMenuClick}
+              >
+                <MoreHoriz />
+              </IconButton>
+            )}
           </Box>
         </Box>
         <CardContent>

@@ -8,6 +8,7 @@ import Post from "./Post/Post";
 const Posts = () => {
   const dispatch = useDispatch();
   /* CEK STATE POSTS */
+  const auth = useSelector((state) => state.auth.data._id);
   const posts = useSelector((state) => state.posts.data);
   const postsStatus = useSelector((state) => state.posts.status);
 
@@ -27,7 +28,7 @@ const Posts = () => {
         <Grid container spacing={1}>
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={5} md={3}>
-              <Post postData={post} />
+              <Post postData={post} userId={auth} />
             </Grid>
           ))}
         </Grid>

@@ -8,15 +8,15 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../features/Posts/postsAPI";
 const PostForm = () => {
   const dispatch = useDispatch();
   const [postData, setPostData] = useState({
-    creator: "",
+    userId: useSelector((state) => state.auth.data._id),
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: {},
   });
 
@@ -33,7 +33,7 @@ const PostForm = () => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(postData).forEach((data) => {
-      const [key, value] = data;
+      let [key, value] = data;
       formData.append(key, value);
     });
     console.log("handlesubmit", formData);
@@ -53,12 +53,7 @@ const PostForm = () => {
         <Typography variant="h5" textAlign={"center"}>
           Buat post
         </Typography>
-        <TextField
-          name="creator"
-          size="small"
-          label="Creator"
-          onBlur={(e) => handleChange(e)}
-        />
+
         <TextField
           name="title"
           size="small"

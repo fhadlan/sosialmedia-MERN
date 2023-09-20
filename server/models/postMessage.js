@@ -8,9 +8,9 @@ const postSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    tags: { type: String, default: [] },
+    tags: [String],
     fileName: String,
-    likes: { type: String, default: [] },
+    likes: [String],
   },
   { timestamps: true }
 );

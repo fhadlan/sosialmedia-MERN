@@ -16,7 +16,15 @@ export const getPost = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-  const newPost = await PostMessage.create(req.body);
+  const { title, message, userId, tags, fileName, likes } = req.body;
+  const newPost = await PostMessage.create({
+    title,
+    message,
+    userId,
+    tags: tags.split(","),
+    fileName,
+    likes,
+  });
   res.status(201).json(newPost);
 };
 

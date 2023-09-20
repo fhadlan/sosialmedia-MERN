@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { signup, signin } from "./authAPI";
 
 const initialState = {
-  data: null,
+  data: { _id: null },
   status: "idle",
   error: null,
 };
@@ -12,7 +12,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signout: (state) => {
-      state.data = null;
+      state.data = { _id: null };
       state.status = "idle";
     },
   },
@@ -23,7 +23,7 @@ const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data = action.payload;
+        state.data = action.payload.data;
       });
   },
 });
