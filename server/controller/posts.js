@@ -25,7 +25,7 @@ export const createPost = async (req, res) => {
     fileName,
     likes,
   });
-  res.status(201).json(newPost);
+  res.status(201).json(await newPost.populate("userId", "firstName lastName"));
 };
 
 export const updatePost = async (req, res) => {
@@ -52,7 +52,7 @@ export const likePost = async (req, res) => {
   const updatedPost = await PostMessage.findByIdAndUpdate(postId, post, {
     new: true,
   });
-  res.status(200).json(updatedPost);
+  res.status(200).json({ _id: updatedPost._id, likes: updatedPost.likes });
 };
 
 export const deletePost = async (req, res) => {

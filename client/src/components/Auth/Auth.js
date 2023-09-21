@@ -12,6 +12,7 @@ import {
   Link,
   Box,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import { Lock, PersonAdd } from "@mui/icons-material";
 
@@ -32,7 +33,7 @@ const Auth = () => {
     if (auth === "succeeded") {
       navigate("/");
     }
-  }, [auth, useDispatch]);
+  }, [auth, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -124,7 +125,13 @@ const Auth = () => {
           <Grid item xs={12} sm={12}>
             <Button type="submit" fullWidth variant="contained" color="primary">
               <Typography variant="button">
-                {isSignUp ? "DAFTAR" : "MASUK"}
+                {auth === "loading" ? (
+                  <CircularProgress size="16px" color="inherit" />
+                ) : isSignUp ? (
+                  "DAFTAR"
+                ) : (
+                  "LOGIN"
+                )}
               </Typography>
             </Button>
           </Grid>

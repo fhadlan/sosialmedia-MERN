@@ -36,6 +36,10 @@ const postsSlice = createSlice({
       })
       .addCase(likePost.fulfilled, (state, action) => {
         state.status = "succeeded";
+        const index = state.data.findIndex(
+          (post) => post._id === action.payload._id
+        );
+        state.data[index].likes = action.payload.likes;
       });
   },
 });

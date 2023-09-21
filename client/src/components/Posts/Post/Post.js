@@ -23,6 +23,7 @@ import { deletePost, likePost } from "../../../features/Posts/postsAPI";
 const Post = ({ postData, userId }) => {
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
+  const isLiked = postData.likes.findIndex((id) => id === userId);
   const dispatch = useDispatch();
   const creator = `${postData.userId.firstName} ${postData.userId.lastName}`;
 
@@ -84,7 +85,7 @@ const Post = ({ postData, userId }) => {
         </CardContent>
         <CardActions>
           <IconButton size="small" onClick={handleLike}>
-            <ThumbUp />
+            <ThumbUp color={isLiked >= 0 ? "primary" : "inherit"} />
           </IconButton>
           <Typography>{postData.likes.length}</Typography>
         </CardActions>

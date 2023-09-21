@@ -18,12 +18,24 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(signup.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(signup.fulfilled, (state, action) => {
         state.status = "succeeded";
       })
+      .addCase(signup.rejected, (state, action) => {
+        state.status = "succeeded";
+      })
+      .addCase(signin.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(signin.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data = action.payload.data;
+        state.data = action.payload;
+      })
+      .addCase(signin.rejected, (state, action) => {
+        state.status = "succeeded";
       });
   },
 });

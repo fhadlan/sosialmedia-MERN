@@ -25,6 +25,6 @@ export const likePost = createAsyncThunk(
   "posts/like",
   async ({ postId, userId }) => {
     const response = await axios.patch(apiUrl, { postId, userId });
-    return response;
+    return response.data;
   }
 );
