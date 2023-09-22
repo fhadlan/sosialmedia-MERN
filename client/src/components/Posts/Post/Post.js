@@ -17,11 +17,12 @@ import {
 import { ThumbUp, Delete, MoreHoriz, Edit } from "@mui/icons-material";
 import moment from "moment";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost, likePost } from "../../../features/Posts/postsAPI";
 
 const Post = ({ postData, userId }) => {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.data.token);
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
   const isLiked = postData.likes.findIndex((id) => id === userId);
@@ -32,10 +33,10 @@ const Post = ({ postData, userId }) => {
 
   const handleMenuClick = (e) => setEditMenu(e.currentTarget);
   const handleMenuClose = () => setEditMenu(null);
-  const handleLike = () => dispatch(likePost({ postId: postData._id, userId }));
+  const handleLike = () => dispatch(likePost({ postId: postData._id, token }));
   const handleDeleteClick = () => setDialogDelete(true);
   const handleDeleteClose = () => setDialogDelete(false);
-  const handleDelete = (id) => dispatch(deletePost(id));
+  const handleDelete = (id) => dispatch(deletePost([id, token]));
 
   return (
     <>

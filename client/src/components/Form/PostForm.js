@@ -10,10 +10,11 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../features/Posts/postsAPI";
+
 const PostForm = () => {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.data.token);
   const [postData, setPostData] = useState({
-    userId: useSelector((state) => state.auth.data._id),
     title: "",
     message: "",
     tags: [],
@@ -36,8 +37,8 @@ const PostForm = () => {
       let [key, value] = data;
       formData.append(key, value);
     });
-    console.log("handlesubmit", formData);
-    dispatch(createPost(formData));
+    console.log("handlesubmit", token);
+    dispatch(createPost([formData, token]));
   };
 
   return (

@@ -10,21 +10,35 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 
 export const createPost = createAsyncThunk(
   "posts/createPost",
-  async (postData) => {
-    const response = await axios.post(apiUrl, postData);
+  async ([postData, token]) => {
+    console.log(postData);
+    const response = await axios.post(apiUrl, postData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   }
 );
 
-export const deletePost = createAsyncThunk("posts/deletePost", async (id) => {
-  const response = await axios.delete(`${apiUrl}/${id}`);
-  return response.data;
-});
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ([id, token]) => {
+    const response = await axios.delete(`${apiUrl}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+);
 
 export const likePost = createAsyncThunk(
   "posts/like",
-  async ({ postId, userId }) => {
-    const response = await axios.patch(apiUrl, { postId, userId });
+  async ({ postId, token }) => {
+    const response = await axios.patch(
+      apiUrl,
+      { postId },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 );

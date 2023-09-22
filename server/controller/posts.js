@@ -16,7 +16,8 @@ export const getPost = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-  const { title, message, userId, tags, fileName, likes } = req.body;
+  const userId = req.userId;
+  const { title, message, tags, fileName, likes } = req.body;
   const newPost = await PostMessage.create({
     title,
     message,
@@ -41,7 +42,8 @@ export const updatePost = async (req, res) => {
 };
 
 export const likePost = async (req, res) => {
-  const { postId, userId } = req.body;
+  const userId = req.userId;
+  const { postId } = req.body;
   const post = await PostMessage.findById(postId);
   const isLiked = post.likes.findIndex((id) => id === userId);
   if (isLiked === -1) {

@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+import { authMiddleware } from "../middleware/authentication.js";
 
 // CONTROLLER IMPORT
 import {
@@ -33,8 +34,8 @@ const upload = multer({ storage });
 router
   .route("/")
   .get(getPost)
-  .post(upload.single("selectedFile"), createPost)
-  .patch(likePost);
-router.route("/:id").patch(updatePost).delete(deletePost);
+  .post(authMiddleware, upload.single("selectedFile"), createPost)
+  .patch(authMiddleware, likePost);
+router.route("/:id").patch(updatePost).delete(authMiddleware, deletePost);
 
 export default router;
