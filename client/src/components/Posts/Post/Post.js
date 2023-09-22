@@ -21,10 +21,10 @@ import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../features/Posts/postsAPI";
 
 const Post = ({ postData, userId }) => {
+  const dispatch = useDispatch();
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
   const isLiked = postData.likes.findIndex((id) => id === userId);
-  const dispatch = useDispatch();
   const creator = `${postData.userId.firstName} ${postData.userId.lastName}`;
 
   const menuOpen = Boolean(editMenu);
@@ -84,7 +84,11 @@ const Post = ({ postData, userId }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton size="small" onClick={handleLike}>
+          <IconButton
+            size="small"
+            onClick={handleLike}
+            disabled={userId === null ? true : false}
+          >
             <ThumbUp color={isLiked >= 0 ? "primary" : "inherit"} />
           </IconButton>
           <Typography>{postData.likes.length}</Typography>
