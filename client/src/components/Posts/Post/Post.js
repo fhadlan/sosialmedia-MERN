@@ -27,6 +27,20 @@ const Post = ({ postData, userId }) => {
   const [dialogDelete, setDialogDelete] = useState(null);
   const isLiked = postData.likes.findIndex((id) => id === userId);
   const creator = `${postData.userId.firstName} ${postData.userId.lastName}`;
+  const postTags = postData.tags.map((tag) => {
+    return (
+      <Typography
+        display={"block"}
+        bgcolor={"lightgray"}
+        borderRadius={3}
+        pl={1}
+        pr={1}
+        fontSize={12}
+      >
+        {tag}
+      </Typography>
+    );
+  });
 
   const menuOpen = Boolean(editMenu);
   const deleteOpen = Boolean(dialogDelete);
@@ -43,13 +57,14 @@ const Post = ({ postData, userId }) => {
       <Card sx={{ position: "relative" }}>
         <CardMedia
           sx={{
-            height: "10rem",
+            height: "8rem",
             objectFit: "cover",
             filter: "brightness(50%)",
           }}
           component={"img"}
           image={`http://localhost:5000/assets/${postData.fileName}`}
         />
+
         <Box
           width={"100%"}
           position={"absolute"}
@@ -79,11 +94,34 @@ const Post = ({ postData, userId }) => {
             )}
           </Box>
         </Box>
+
         <CardContent>
+          <Box
+            display={"flex"}
+            overflow={"auto"}
+            flexDirection={"row"}
+            gap={0.5}
+          >
+            {postTags}
+          </Box>
           <Typography variant="h5" gutterBottom noWrap>
             {postData.title}
           </Typography>
+          <Box>
+            <Typography
+              variant="body1"
+              lineHeight={"1rem"}
+              height={"2.1rem"}
+              width={"240px"}
+              whiteSpace={"normal"}
+              overflow={"hidden"}
+              textOverflow={"ellipsis"}
+            >
+              {postData.message}
+            </Typography>
+          </Box>
         </CardContent>
+
         <CardActions>
           <IconButton
             size="small"
