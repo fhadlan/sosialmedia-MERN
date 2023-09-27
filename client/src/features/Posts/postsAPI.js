@@ -8,6 +8,15 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   return response.data;
 });
 
+export const fetchPostsSearch = createAsyncThunk(
+  "posts/search",
+  async ({ searchParams }) => {
+    const query = searchParams.get("searchQuery");
+    const response = await axios.get(`${apiUrl}/search?searchQuery=${query}`);
+    return response.data;
+  }
+);
+
 export const createPost = createAsyncThunk(
   "posts/createPost",
   async ([postData, token]) => {

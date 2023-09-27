@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
+import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import postsReducer from "../features/Posts/postsSlice";
 import authReducer from "../features/Auth/authSlice";
@@ -17,3 +17,5 @@ export const store = configureStore({
     auth: persistedAuthReducer,
   },
 });
+
+export const persistor = persistStore(store);

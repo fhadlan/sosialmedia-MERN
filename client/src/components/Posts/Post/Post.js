@@ -13,8 +13,15 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  Chip,
 } from "@mui/material";
-import { ThumbUp, Delete, MoreHoriz, Edit } from "@mui/icons-material";
+import {
+  ThumbUp,
+  Delete,
+  MoreHoriz,
+  Edit,
+  ThumbUpOutlined,
+} from "@mui/icons-material";
 import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,21 +32,11 @@ const Post = ({ postData, userId }) => {
   const token = useSelector((state) => state.auth.data.token);
   const [editMenu, setEditMenu] = useState(null);
   const [dialogDelete, setDialogDelete] = useState(null);
+
   const isLiked = postData.likes.findIndex((id) => id === userId);
   const creator = `${postData.userId.firstName} ${postData.userId.lastName}`;
-  const postTags = postData.tags.map((tag) => {
-    return (
-      <Typography
-        display={"block"}
-        bgcolor={"lightgray"}
-        borderRadius={3}
-        pl={1}
-        pr={1}
-        fontSize={12}
-      >
-        {tag}
-      </Typography>
-    );
+  const postTags = postData.tags.map((tag, index) => {
+    return <Chip label={tag} size="small" key={index} />;
   });
 
   const menuOpen = Boolean(editMenu);
@@ -101,18 +98,20 @@ const Post = ({ postData, userId }) => {
             overflow={"auto"}
             flexDirection={"row"}
             gap={0.5}
+            mb={1}
           >
             {postTags}
           </Box>
-          <Typography variant="h5" gutterBottom noWrap>
+          <Typography variant="h6" gutterBottom noWrap>
             {postData.title}
           </Typography>
           <Box>
             <Typography
-              variant="body1"
+              variant="body2"
               lineHeight={"1rem"}
-              height={"2.1rem"}
+              height={"3rem"}
               width={"240px"}
+              color={"GrayText"}
               whiteSpace={"normal"}
               overflow={"hidden"}
               textOverflow={"ellipsis"}
@@ -128,7 +127,7 @@ const Post = ({ postData, userId }) => {
             onClick={handleLike}
             disabled={userId === null ? true : false}
           >
-            <ThumbUp color={isLiked >= 0 ? "primary" : "inherit"} />
+            {isLiked >= 0 ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
           </IconButton>
           <Typography>{postData.likes.length}</Typography>
         </CardActions>

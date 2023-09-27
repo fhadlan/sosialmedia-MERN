@@ -9,6 +9,7 @@ import {
   createPost,
   deletePost,
   getPost,
+  getPostSearch,
   likePost,
   updatePost,
 } from "../controller/posts.js";
@@ -37,5 +38,6 @@ router
   .post(authMiddleware, upload.single("selectedFile"), createPost)
   .patch(authMiddleware, likePost);
 router.route("/:id").patch(updatePost).delete(authMiddleware, deletePost);
+router.route("/search").get(getPostSearch);
 
 export default router;

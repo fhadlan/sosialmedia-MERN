@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPosts, createPost, deletePost, likePost } from "./postsAPI";
+import {
+  fetchPosts,
+  createPost,
+  deletePost,
+  likePost,
+  fetchPostsSearch,
+} from "./postsAPI";
 
 const initialState = {
   data: [],
@@ -40,6 +46,10 @@ const postsSlice = createSlice({
           (post) => post._id === action.payload._id
         );
         state.data[index].likes = action.payload.likes;
+      })
+      .addCase(fetchPostsSearch.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
       });
   },
 });

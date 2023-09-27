@@ -15,6 +15,15 @@ export const getPost = async (req, res) => {
   res.status(200).json(postMessages);
 };
 
+export const getPostSearch = async (req, res) => {
+  const { searchQuery } = req.query;
+  const title = new RegExp(searchQuery, "i");
+  const postMessages = await PostMessage.find({ title })
+    .populate("userId", "firstName lastName")
+    .sort({ createdAt: "desc" });
+  res.status(200).json(postMessages);
+};
+
 export const createPost = async (req, res) => {
   const userId = req.userId;
   const { title, message, tags, fileName, likes } = req.body;
