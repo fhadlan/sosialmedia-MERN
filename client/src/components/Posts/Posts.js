@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CircularProgress, Grid } from "@mui/material";
 import { fetchPosts } from "../../features/Posts/postsAPI";
 import Post from "./Post/Post";
+import { useLocation } from "react-router-dom";
 
 const Posts = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   /* CEK STATE POSTS */
   const auth = useSelector((state) => state.auth.data._id);
   const posts = useSelector((state) => state.posts.data);
   const postsStatus = useSelector((state) => state.posts.status);
+  const search = location.search;
 
   useEffect(() => {
-    if (postsStatus === "idle") {
+    if (search === "") {
       dispatch(fetchPosts());
     }
-  }, [postsStatus, dispatch]);
+  }, []);
 
   let content;
   switch (postsStatus) {

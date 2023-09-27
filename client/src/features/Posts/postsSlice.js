@@ -24,7 +24,7 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data.push(...action.payload);
+        state.data = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
@@ -46,6 +46,9 @@ const postsSlice = createSlice({
           (post) => post._id === action.payload._id
         );
         state.data[index].likes = action.payload.likes;
+      })
+      .addCase(fetchPostsSearch.pending, (state, action) => {
+        state.status = "loading";
       })
       .addCase(fetchPostsSearch.fulfilled, (state, action) => {
         state.status = "succeeded";
