@@ -16,9 +16,11 @@ export const getPost = async (req, res) => {
 };
 
 export const getPostSearch = async (req, res) => {
-  const { searchQuery } = req.query;
+  const { searchQuery, tags } = req.query;
   const title = new RegExp(searchQuery, "i");
-  const postMessages = await PostMessage.find({ title })
+  const postMessages = await PostMessage.find({
+    $or: [{ title }, { tags: { $in: tags.split("-") } }],
+  })
     .populate("userId", "firstName lastName")
     .sort({ createdAt: "desc" });
   res.status(200).json(postMessages);

@@ -11,8 +11,11 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 export const fetchPostsSearch = createAsyncThunk(
   "posts/search",
   async ({ searchParams }) => {
-    const query = searchParams.get("searchQuery");
-    const response = await axios.get(`${apiUrl}/search?searchQuery=${query}`);
+    const searchQuery = searchParams.get("searchQuery");
+    const tags = searchParams.get("tags");
+    const response = await axios.get(
+      `${apiUrl}/search?searchQuery=${searchQuery}&tags=${tags}`
+    );
     return response.data;
   }
 );

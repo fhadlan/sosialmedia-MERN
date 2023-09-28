@@ -19,7 +19,7 @@ const Posts = () => {
     if (search === "") {
       dispatch(fetchPosts());
     }
-  }, []);
+  }, [search]);
 
   let content;
   switch (postsStatus) {
